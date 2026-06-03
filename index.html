@@ -152,19 +152,104 @@
 </div>
 
 <script>
+var pwdErrorCount = 0;
+
+function checkPwd(){
+  var pwd = document.getElementById('pwdInput').value.trim();
+  if(pwd === '0230'){
+    document.getElementById('pwdError').innerText = '';
+    pwdErrorCount = 0;
+    triggerRedScreen('welcome');
+  } else if(pwd === '') {
+    document.getElementById('pwdError').innerText = '请输入密码';
+  } else {
+    pwdErrorCount++;
+    if(pwdErrorCount >= 3){
+      document.getElementById('pwdError').innerText = '';
+      triggerRedScreen('error');
+    } else {
+      document.getElementById('pwdError').innerText = '密码错误（' + pwdErrorCount + '/3）';
+    }
+  }
+}
+
+function triggerRedScreen(type){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-redscreen').classList.add('active');
+  
+  var container = document.getElementById('redTextContainer');
+  container.innerHTML = '';
+  
+  var count = 0;
+  var maxCount = 200;
+  
+  var interval = setInterval(function(){
+    var text = document.createElement('div');
+    text.innerText = '你好，李宜明';
+    text.style.position = 'absolute';
+    text.style.color = 'red';
+    text.style.fontSize = (Math.random() * 30 + 14) + 'px';
+    text.style.left = (Math.random() * 90) + '%';
+    text.style.top = (Math.random() * 90) + '%';
+    text.style.opacity = Math.random() * 0.8 + 0.2;
+    text.style.fontWeight = Math.random() > 0.5 ? 'bold' : 'normal';
+    text.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg)';
+    text.style.textShadow = '0 0 10px red';
+    container.appendChild(text);
+    
+    count++;
+    if(count >= maxCount){
+      clearInterval(interval);
+      setTimeout(function(){
+        container.innerHTML = '';
+        var centerText = document.createElement('div');
+        centerText.style.position = 'absolute';
+        centerText.style.top = '50%';
+        centerText.style.left = '50%';
+        centerText.style.transform = 'translate(-50%,-50%)';
+        centerText.style.color = 'red';
+        centerText.style.fontSize = '28px';
+        centerText.style.fontWeight = 'bold';
+        centerText.style.textAlign = 'center';
+        centerText.style.textShadow = '0 0 30px red';
+        centerText.style.lineHeight = '2';
+        
+        if(type === 'welcome'){
+          centerText.innerHTML = '欢迎回家<br>李宜明<br><br><span style="font-size:14px;color:#666;">—— 你一直都在</span>';
+        } else {
+          centerText.innerHTML = '你还没想起来吗<br><br><span style="font-size:14px;color:#666;">—— 再试一次</span>';
+        }
+        
+        container.appendChild(centerText);
+        
+        if(type === 'error'){
+          setTimeout(function(){
+            document.getElementById('page-redscreen').classList.remove('active');
+            document.getElementById('page-weibo').classList.add('active');
+            document.getElementById('pwdInput').value = '';
+            pwdErrorCount = 0;
+          }, 3000);
+        }
+      }, 2000);
+    }
+  }, 80);
+}
+
 function goTo(pageId){
+  if(pageId === 'page-redscreen') return;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
   window.scrollTo(0,0);
 }
+
 function searchAlumni(){
-  const val=document.getElementById('searchInput').value.trim();
-  if(val==='李宜明'){
+  var val = document.getElementById('searchInput').value.trim();
+  if(val === '李宜明'){
     goTo('page-profile');
-  }else if(val===''){
-    document.getElementById('searchHint').innerText='';
-  }else{
-    document.getElementById('searchHint').innerText='未找到相关校友。';
+  } else if(val === ''){
+    document.getElementById('searchHint').innerText = '';
+  } else {
+    document.getElementById('searchHint').innerText = '未找到相关校友。';
   }
 }
 </script>

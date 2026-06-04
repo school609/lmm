@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>明川实验中学官网</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f5f5f5;color:#333;line-height:1.8}
+  .container{max-width:500px;margin:0 auto;background:#fff;min-height:100vh}
+  .page{display:none;padding:0}
+  .page.active{display:block}
+
+  /* 顶部导航 */
+  .top-nav{background:#1a3c5e;color:#fff;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;font-size:13px}
+  .top-nav .logo{font-weight:bold;font-size:16px}
+  .top-nav .menu{display:flex;gap:12px;font-size:12px}
+
+  /* 滚动横幅 */
+  .marquee-bar{background:#fff;border-bottom:1px solid #e0e0e0;padding:8px 0;overflow:hidden}
+  .marquee-content{display:flex;animation:marquee 25s linear infinite;white-space:nowrap}
+  .marquee-content span{display:inline-block;padding:0 30px;color:#1a3c5e;font-size:13px;font-weight:bold}
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* 搜索区 */
+  .search-area{padding:20px 15px;text-align:center}
+  .search-area h2{font-size:18px;color:#1a3c5e;margin-bottom:5px}
+  .search-area .subtitle{font-size:12px;color:#999;margin-bottom:15px}
+  .search-box{display:flex;gap:8px;max-width:350px;margin:0 auto}
+  .search-box input{flex:1;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:14px}
+  .search-box button{padding:10px 20px;background:#1a3c5e;color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer}
+
+  /* 标题列表 */
+  .news-list{padding:0 15px 20px}
+  .news-item{padding:14px 0;border-bottom:1px solid #f0f0f0;cursor:default;color:#999;font-size:14px}
+  .news-item .tag{color:#1a3c5e;font-weight:bold;font-size:12px;margin-right:6px}
+  .news-item.cant-click{color:#bbb;cursor:not-allowed}
+
+  /* 档案卡 */
+  .profile-section{padding:15px}
+  .back-link{color:#1a3c5e;cursor:pointer;font-size:13px;margin-bottom:12px;display:block}
+  .profile-header{text-align:center;padding:20px 0}
+  .profile-header .avatar{width:70px;height:70px;background:#e8e8e8;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:35px;color:#ccc}
+  .profile-header .name{font-size:20px;font-weight:bold;color:#1a3c5e}
+  .info-table{width:100%;border-collapse:collapse;margin:15px 0}
+  .info-table td{padding:8px 10px;border-bottom:1px solid #f0f0f0;font-size:13px}
+  .info-table td:first-child{color:#999;width:30%}
+  .info-table td:last-child{color:#333}
+  .info-table .empty{color:#ccc}
+
+  /* 评论 */
+  .comment-section{padding:0 15px 20px}
+  .comment-section h4{font-size:14px;color:#1a3c5e;margin-bottom:10px;border-bottom:2px solid #1a3c5e;padding-bottom:5px}
+  .comment-item{padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:13px}
+  .comment-item .c-user{color:#1a3c5e;font-weight:bold}
+  .comment-item .c-time{color:#ccc;font-size:11px;margin-left:6px}
+
+  /* 论坛 */
+  .forum-list{padding:15px}
+  .forum-title{font-size:18px;font-weight:bold;color:#1a3c5e;text-align:center;margin-bottom:15px}
+  .forum-item{padding:12px 10px;border-bottom:1px solid #f0f0f0;font-size:13px;color:#999;cursor:default}
+  .forum-item.clickable{color:#333;cursor:pointer;font-weight:bold}
+  .forum-item.clickable:hover{background:#f9f9f9}
+
+  /* 帖子详情 */
+  .post-detail{padding:15px}
+  .post-title-detail{font-size:16px;font-weight:bold;color:#1a3c5e;margin-bottom:5px}
+  .post-meta{font-size:11px;color:#999;margin-bottom:15px}
+  .post-body{font-size:13px;line-height:2;word-break:break-all;margin-bottom:20px}
+  .post-reply{padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:12px}
+  .post-reply .r-user{color:#1a3c5e;font-weight:bold}
+  .post-reply .r-time{color:#ccc;font-size:10px;margin-left:6px}
+
+  hr{margin:15px 0;border:none;border-top:1px solid #eee}
+  .link{color:#1a3c5e;cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ==================== 官网首页 ==================== -->
+<div class="page active" id="page-home">
+  <div class="top-nav">
+    <span class="logo">明川实验中学</span>
+    <span class="menu">首页 | 学校概况 | 联系我们</span>
+  </div>
+
+  <!-- 滚动标题 -->
+  <div class="marquee-bar">
+    <div class="marquee-content">
+      <span>🏆 最美明川，最美实验！</span>
+      <span>🏅 26届校运会完美结束！</span>
+      <span>👩‍🏫 感恩教师节——致敬张桂芳老师</span>
+      <span>🎓 毕业季快乐，前程似锦！</span>
+      <span>📢 热烈祝贺我校获评市级优秀单位</span>
+      <span>🏆 最美明川，最美实验！</span>
+      <span>🏅 26届校运会完美结束！</span>
+      <span>👩‍🏫 感恩教师节——致敬张桂芳老师</span>
+      <span>🎓 毕业季快乐，前程似锦！</span>
+      <span>📢 热烈祝贺我校获评市级优秀单位</span>
+    </div>
+  </div>
+
+  <div class="search-area">
+    <h2>校友档案查询</h2>
+    <p class="subtitle">输入校友姓名，查看档案信息</p>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="输入校友姓名...">
+      <button onclick="searchAlumni()">查询</button>
+    </div>
+    <p id="searchHint" style="color:#999;font-size:12px;margin-top:8px"></p>
+  </div>
+
+  <div class="news-list">
+    <div class="news-item cant-click"><span class="tag">[校园]</span>最美明川，最美实验！</div>
+    <div class="news-item cant-click"><span class="tag">[体育]</span>26届校运会完美结束！</div>
+    <div class="news-item cant-click"><span class="tag">[教师]</span>感恩教师节——我校张桂芳老师获评市级优秀教师</div>
+    <div class="news-item cant-click"><span class="tag">[毕业]</span>毕业季快乐——致2014届全体毕业生</div>
+    <div class="news-item cant-click"><span class="tag">[荣誉]</span>热烈祝贺我校获评市级优秀单位</div>
+    <div class="news-item cant-click"><span class="tag">[活动]</span>校园文化艺术节圆满落幕</div>
+    <div class="news-item cant-click"><span class="tag">[通知]</span>关于做好期末教学工作的通知</div>
+  </div>
+</div>
+
+<!-- ==================== 李宜明档案页 ==================== -->
+<div class="page" id="page-profile">
+  <div class="top-nav">
+    <span class="logo">明川实验中学</span>
+    <span class="menu">校友档案</span>
+  </div>
+  <div class="profile-section">
+    <span class="back-link" onclick="goTo('page-home')">← 返回首页</span>
+    <div class="profile-header">
+      <div class="avatar">👤</div>
+      <p class="name">李宜明</p>
+    </div>
+    <table class="info-table">
+      <tr><td>入学时间</td><td>2011年9月1日</td></tr>
+      <tr><td>毕业时间</td><td>2014年6月15日</td></tr>
+      <tr><td>性别</td><td class="empty">（空白）</td></tr>
+      <tr><td>生日</td><td class="empty">（空白）</td></tr>
+      <tr><td>班级</td><td class="empty">（空白）</td></tr>
+      <tr><td>兴趣</td><td class="empty">（空白）</td></tr>
+      <tr><td>爱好</td><td><span class="link" onclick="goTo('page-forum')">破迷信立科学</span></td></tr>
+    </table>
+  </div>
+
+  <div class="comment-section">
+    <h4>同学留言</h4>
+    <div class="comment-item"><span class="c-user">同学A</span><span class="c-time">2016-03-15</span><br>🌹🌹🌹</div>
+    <div class="comment-item"><span class="c-user">同学B</span><span class="c-time">2016-04-01</span><br>💐💐</div>
+    <div class="comment-item"><span class="c-user">匿名</span><span class="c-time">2016-05-20</span><br>喜欢你。</div>
+    <div class="comment-item"><span class="c-user">同学C</span><span class="c-time">2016-06-01</span><br>🌸🌸🌸🌸</div>
+    <div class="comment-item"><span class="c-user">匿名</span><span class="c-time">2016-07-07</span><br>你真好。</div>
+    <div class="comment-item"><span class="c-user">同学D</span><span class="c-time">2016-08-15</span><br>🌻</div>
+    <div class="comment-item"><span class="c-user">匿名</span><span class="c-time">2016-09-10</span><br>一直记得你。</div>
+    <div class="comment-item"><span class="c-user">同学E</span><span class="c-time">2016-10-01</span><br>🌷🌷🌷🌷🌷</div>
+  </div>
+</div>
+
+<!-- ==================== 论坛页 ==================== -->
+<div class="page" id="page-forum">
+  <div class="top-nav">
+    <span class="logo">破迷信立科学</span>
+    <span class="menu">论坛</span>
+  </div>
+  <div class="forum-list">
+    <span class="back-link" onclick="goTo('page-profile')">← 返回档案</span>
+    <p class="forum-title">破迷信立科学</p>
+    <p style="text-align:center;color:#999;font-size:12px;margin-bottom:15px">探索未知，相信科学</p>
+
+    <div class="forum-item clickable" onclick="goTo('page-post1')">📄 四月四日公司团建</div>
+    <div class="forum-item clickable" onclick="goTo('page-post2')">📄 同学聚会上出现了一个不认识的同学</div>
+    <div class="forum-item">🔒 深夜办公楼里的脚步声</div>
+    <div class="forum-item">🔒 我家猫一直盯着天花板看</div>
+    <div class="forum-item">🔒 医院值班室的呼叫铃</div>
+    <div class="forum-item">🔒 老旧小区的电梯按钮</div>
+    <div class="forum-item">🔒 凌晨三点的敲门声</div>
+    <div class="forum-item">🔒 监控里多出来的影子</div>
+    <div class="forum-item">🔒 地下车库的脚步声</div>
+    <div class="forum-item">🔒 学校厕所最后一间</div>
+    <div class="forum-item">🔒 深夜末班公交车</div>
+  </div>
+</div>
+
+<!-- ==================== 帖子1：公司团建 ==================== -->
+<div class="page" id="page-post1">
+  <div class="top-nav">
+    <span class="logo">破迷信立科学</span>
+    <span class="menu">帖子详情</span>
+  </div>
+  <div class="post-detail">
+    <span class="back-link" onclick="goTo('page-forum')">← 返回论坛</span>
+    <p class="post-title-detail">四月四日公司团建</p>
+    <p class="post-meta">发帖时间：2018年4月4日 | 发帖人：不想再去团建了</p>
+    <p class="post-body">我就职一家不大的家用纺织品公司，老板脾气暴躁，公司氛围非常压抑，但是在三月底的时候，老板突然说要带公司所有人去明川市团建，选在了一家叫乐家和的山间汤泉度假村……去参加这次团建是我最后悔的事情，他们这里有7g€K2#aQ&amp;%f9sD@n3!w</p>
+    <hr>
+    <div class="post-reply"><span class="r-user">1楼</span><span class="r-time">2018-04-04</span><br>楼主后面的内容怎么是乱码？</div>
+    <div class="post-reply"><span class="r-user">2楼</span><span class="r-time">2018-04-04</span><br>乐家和？这个度假村不早在13年的时候就已经停业了吗，什么时候又开业了，本地人怎么不知道。</div>
+    <div class="post-reply"><span class="r-user">3楼</span><span class="r-time">2018-04-04</span><br>楼主你还好吗？要不要去医院看看。</div>
+    <div class="post-reply"><span class="r-user">4楼</span><span class="r-time">2018-04-05</span><br>编故事也编得像一点，乐家和早就拆了。</div>
+    <div class="post-reply"><span class="r-user">5楼</span><span class="r-time">2018-04-05</span><br>楼主还在吗？回个话啊。</div>
+  </div>
+</div>
+
+<!-- ==================== 帖子2：同学聚会 ==================== -->
+<div class="page" id="page-post2">
+  <div class="top-nav">
+    <span class="logo">破迷信立科学</span>
+    <span class="menu">帖子详情</span>
+  </div>
+  <div class="post-detail">
+    <span class="back-link" onclick="goTo('page-forum')">← 返回论坛</span>
+    <p class="post-title-detail">同学聚会上出现了一个不认识的同学</p>
+    <p class="post-meta">发帖时间：2015年9月13日 02:11 | 发帖人：不想再参加了</p>
+    <p class="post-body">今天下午我参加了老班长组织的大学同学聚会，聚会上有一个奇怪的人，我不认识ta，一开始以为ta是走错了，但我注意到在场所有人对其都表现得很熟悉，我一整个聚会都在观察ta，我不认识ta，周围人都围着ta笑，太诡异了，我到家后立马翻出来当时的毕业照，我的记忆没出错，根本就没有这个人！现在回想ta，我发现我不知道ta是男是女长什么样子了！</p>
+    <hr>
+    <div class="post-reply"><span class="r-user">1楼</span><span class="r-time">2015-09-13</span><br>楼主你还好吗。现在在哪儿。</div>
+    <div class="post-reply"><span class="r-user">2楼</span><span class="r-time">2015-09-13</span><br>你是不是碰了什么不干净的东西。去找人看看。</div>
+    <div class="post-reply"><span class="r-user">3楼</span><span class="r-time">2015-09-13</span><br>别自己吓自己。可能就是记混了。</div>
+    <div class="post-reply"><span class="r-user">4楼</span><span class="r-time">2015-09-13</span><br>我遇到过差不多的事。也是聚会。也是多了一个人。但所有人都认识。就我不认识。我没敢问。到现在也没敢问。</div>
+    <div class="post-reply"><span class="r-user">5楼</span><span class="r-time">2015-09-13</span><br>你们别在这儿传封建迷信了。大概率是楼主记性不好。</div>
+    <div class="post-reply"><span class="r-user">6楼</span><span class="r-time">2015-09-13</span><br>记性不好能连男女都分不清。</div>
+    <div class="post-reply"><span class="r-user">7楼</span><span class="r-time">2015-09-14</span><br>楼主呢。回个话。</div>
+    <div class="post-reply"><span class="r-user">8楼</span><span class="r-time">2015-09-14</span><br>别问了。这种帖子一般楼主都不会再回复的。</div>
+    <div class="post-reply"><span class="r-user" style="color:#999">9楼</span><span class="r-time">2015-09-14</span><br>7g€K2#aQ&amp;%f9sD@n3!w</div>
+    <div class="post-reply"><span class="r-user">10楼</span><span class="r-time">2015-09-14</span><br>刚才那楼是什么东西。</div>
+    <div class="post-reply"><span class="r-user">11楼</span><span class="r-time">2015-09-14</span><br>乱码又没了。我刷新了一下就不见了。</div>
+  </div>
+</div>
+
+<!-- ==================== 缅怀页 ==================== -->
+<div class="page" id="page-memorial">
+  <div class="top-nav">
+    <span class="logo">明川实验中学</span>
+    <span class="menu">校友档案</span>
+  </div>
+  <div style="text-align:center;padding:40px 20px">
+    <span class="back-link" onclick="goTo('page-home')" style="text-align:left;display:block">← 返回首页</span>
+    <p style="font-size:22px;font-weight:bold;color:#1a3c5e;margin:30px 0 15px">李宜明</p>
+    <p style="font-size:15px;color:#666;margin:8px 0">2014年6月22日</p>
+    <p style="font-size:15px;color:#666;margin:8px 0">2026年8月1日</p>
+    <hr style="width:50%;margin:25px auto">
+    <p style="font-size:14px;color:#999;margin-top:15px">在此缅怀李宜明。</p>
+  </div>
+</div>
+
+</div>
+
+<script>
+function goTo(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function searchAlumni(){
+  var val = document.getElementById('searchInput').value.trim();
+  if(val === '李宜明'){
+    goTo('page-profile');
+  } else if(val === '7g€K2#aQ&%f9sD@n3!w'){
+    goTo('page-memorial');
+  } else if(val === ''){
+    document.getElementById('searchHint').innerText = '';
+  } else {
+    document.getElementById('searchHint').innerText = '未找到相关校友。';
+  }
+}
+</script>
+</body>
+</html>

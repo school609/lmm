@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>乐家和 · 欢迎来到乐家和</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    background:#f5f5f5;
+    color:#333;
+    line-height:1.8;
+  }
+  .page{display:none}
+  .page.active{display:block}
+  .container{max-width:500px;margin:0 auto;background:#fff;min-height:100vh}
+
+  /* ========== 首页样式 ========== */
+  .top-bar{
+    background:#2c5f3f;
+    color:#fff;
+    padding:12px 15px;
+    font-size:18px;
+    font-weight:bold;
+    text-align:center;
+    letter-spacing:2px;
+  }
+  .top-bar .subtitle{
+    font-size:12px;
+    font-weight:normal;
+    letter-spacing:1px;
+    margin-top:2px;
+    opacity:0.8;
+  }
+  .nav{
+    display:flex;
+    flex-wrap:wrap;
+    background:#234d32;
+    padding:8px 10px;
+    gap:8px;
+    font-size:11px;
+    justify-content:center;
+  }
+  .nav span{
+    color:#c8e6c9;
+    cursor:default;
+    padding:4px 8px;
+    border-radius:3px;
+    transition:0.2s;
+  }
+  .nav span:active{background:rgba(255,255,255,0.1)}
+  .nav span.join-btn{cursor:pointer;color:#ffd54f;font-weight:bold}
+
+  .banner{
+    background:linear-gradient(135deg,#2c5f3f,#1b3d27);
+    color:#fff;
+    padding:30px 20px;
+    text-align:center;
+    margin-bottom:20px;
+  }
+  .banner h2{font-size:20px;margin-bottom:8px}
+  .banner p{font-size:13px;opacity:0.8}
+
+  .product-list{padding:0 15px}
+  .product-item{
+    border:1px solid #e0e0e0;
+    border-radius:8px;
+    padding:15px;
+    margin-bottom:12px;
+    cursor:pointer;
+    text-align:center;
+    transition:0.2s;
+  }
+  .product-item:active{background:#f5f5f5}
+  .product-item h4{font-size:15px;color:#2c5f3f;margin-bottom:4px}
+  .product-item p{font-size:12px;color:#999}
+  .product-item .fail-hint{color:#c0392b;font-size:11px;display:none;margin-top:5px}
+  .product-item .fail-hint.show{display:block}
+
+  .contact-info{padding:20px 15px;font-size:12px;color:#666;line-height:2.2}
+  .contact-info .address{color:#999}
+  .contact-info .phone{color:#999}
+
+  .footer{
+    background:#f0f0f0;
+    padding:15px;
+    text-align:center;
+    font-size:10px;
+    color:#999;
+    line-height:2;
+  }
+
+  /* ========== 加入我们 - 搜索页 ========== */
+  .search-page{
+    background:#2c5f3f;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:30px 20px;
+  }
+  .search-page .search-label{
+    color:#c8e6c9;
+    font-size:14px;
+    margin-bottom:20px;
+    letter-spacing:2px;
+  }
+  .search-page .search-row{
+    display:flex;
+    gap:8px;
+    width:100%;
+    max-width:300px;
+  }
+  .search-page .search-row input{
+    flex:1;
+    padding:12px 15px;
+    border:2px solid #c8e6c9;
+    border-radius:25px;
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+    font-size:15px;
+    outline:none;
+    text-align:center;
+  }
+  .search-page .search-row input::placeholder{color:rgba(255,255,255,0.4)}
+  .search-page .search-row button{
+    padding:12px 20px;
+    background:#c8e6c9;
+    color:#2c5f3f;
+    border:none;
+    border-radius:25px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:14px;
+  }
+  .search-page .search-hint{
+    color:#ffcdd2;
+    font-size:12px;
+    margin-top:15px;
+    min-height:18px;
+  }
+  .search-page .back-link{
+    color:rgba(255,255,255,0.6);
+    cursor:pointer;
+    font-size:13px;
+    margin-top:30px;
+    text-decoration:underline;
+  }
+
+  /* ========== 加入我们 - 内容页 ========== */
+  .page-recruit{
+    background:#0b3d1f;
+    min-height:100vh;
+  }
+  .recruit-banner{
+    background:#8b1a4a;
+    color:#d4a017;
+    padding:25px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:4px;
+  }
+  .recruit-body{
+    padding:20px 15px;
+    color:#000;
+    font-size:14px;
+    line-height:2.2;
+  }
+  .recruit-body .welcome-text{
+    text-align:center;
+    font-size:15px;
+    margin-bottom:25px;
+    line-height:2;
+    color:#000;
+  }
+  .recruit-body .section-title{
+    text-align:center;
+    font-size:22px;
+    margin:25px 0 15px;
+    letter-spacing:3px;
+    color:#000;
+  }
+  .recruit-body .emoji-title{
+    text-align:center;
+    font-size:40px;
+    margin:20px 0;
+    letter-spacing:8px;
+  }
+  .recruit-body .job-list{
+    list-style:none;
+    padding:0;
+    margin:15px 0;
+  }
+  .recruit-body .job-list li{
+    text-align:center;
+    padding:10px 0;
+    font-size:18px;
+    letter-spacing:2px;
+    color:#000;
+  }
+  .recruit-body .missing{
+    text-align:center;
+    color:#000;
+    font-style:italic;
+    margin-top:20px;
+    font-size:13px;
+    opacity:0.8;
+  }
+  .recruit-footer{
+    text-align:center;
+    padding:30px 15px;
+    font-size:12px;
+    color:#000;
+    opacity:0.7;
+  }
+  .recruit-back{
+    color:#000;
+    cursor:pointer;
+    font-size:13px;
+    padding:10px 15px;
+    display:inline-block;
+    text-decoration:underline;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ==================== 首页 ==================== -->
+<div class="page active" id="page-home">
+  <div class="top-bar">
+    乐家和
+    <div class="subtitle">首页 · 欢迎来到乐家和</div>
+  </div>
+  <div style="text-align:center;padding:8px;font-size:12px;color:#2c5f3f;background:#e8f5e9">我们竭力为您和您的家庭服务</div>
+
+  <div class="nav">
+    <span>首页</span>
+    <span>智慧家电</span>
+    <span>乐学教育</span>
+    <span>同行旅游</span>
+    <span>关于乐家和</span>
+    <span class="join-btn" onclick="goTo('page-search')">加入我们</span>
+  </div>
+
+  <div class="banner">
+    <h2>阖家欢乐，乐家和</h2>
+    <p>为您和您的家人，提供全方位的家居解决方案</p>
+  </div>
+
+  <div class="product-list">
+    <div class="product-item" onclick="showFail(this)">
+      <h4>🔐 乐家和智能锁</h4>
+      <p>让家更安心！</p>
+      <p class="fail-hint">加载失败，请稍后再试</p>
+    </div>
+    <div class="product-item" onclick="showFail(this)">
+      <h4>📷 乐家和摄像头</h4>
+      <p>记录您的家庭！</p>
+      <p class="fail-hint">加载失败，请稍后再试</p>
+    </div>
+    <div class="product-item" onclick="showFail(this)">
+      <h4>💒 乐家和婚庆</h4>
+      <p>幸福从这里开始</p>
+      <p class="fail-hint">加载失败，请稍后再试</p>
+    </div>
+    <div class="product-item" onclick="showFail(this)">
+      <h4>👨‍👩‍👧 乐家和亲子</h4>
+      <p>陪伴成长每一步</p>
+      <p class="fail-hint">加载失败，请稍后再试</p>
+    </div>
+    <div class="product-item" onclick="showFail(this)">
+      <h4>📚 乐家和教育</h4>
+      <p>知识改变家庭</p>
+      <p class="fail-hint">加载失败，请稍后再试</p>
+    </div>
+  </div>
+
+  <div class="contact-info">
+    <p><b>总部地址：</b></p>
+    <p class="address">华夏 · 明川市 · 愿佳县 ███████</p>
+    <p style="margin-top:10px"><b>客服热线：</b></p>
+    <p class="phone">400-5817-███</p>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 乐家和有限公司 · 保留所有权利</p>
+    <p>备案号：乐集备字[2010]第000001号</p>
+  </div>
+</div>
+
+<!-- ==================== 搜索页 ==================== -->
+<div class="page search-page" id="page-search">
+  <p class="search-label">请输入访问口令</p>
+  <div class="search-row">
+    <input type="text" id="searchPwd" placeholder="输入口令" onkeydown="if(event.key==='Enter')checkSearchPwd()">
+    <button onclick="checkSearchPwd()">确认</button>
+  </div>
+  <p class="search-hint" id="searchPwdHint"></p>
+  <span class="back-link" onclick="goTo('page-home')">← 返回首页</span>
+</div>
+
+<!-- ==================== 加入我们 - 内容页 ==================== -->
+<div class="page page-recruit" id="page-recruit">
+  <div class="recruit-banner">阖家欢乐</div>
+  
+  <div class="recruit-body">
+    <p style="text-align:center;font-size:13px;margin-bottom:5px;color:#000">首页 · 欢迎来到乐家和</p>
+    
+    <p class="welcome-text">
+      我们将找到你<br>
+      我们将帮助你<br>
+      我们将邀请你<br>
+      我们将接纳你的一切
+    </p>
+
+    <div class="emoji-title">🪷</div>
+
+    <div class="section-title">加入我们</div>
+    
+    <p style="text-align:center;margin-bottom:15px;color:#000">您只需要成为我们：）</p>
+    
+    <p style="text-align:center;font-weight:bold;margin-bottom:10px;color:#000">乐家和长期招聘以下岗位：</p>
+    
+    <ul class="job-list">
+      <li>· 爸爸</li>
+      <li>· 妈妈</li>
+      <li>· 孩子</li>
+      <li>· 更多岗位欢迎您的加入</li>
+    </ul>
+
+    <p class="missing">面试流程：内容缺失</p>
+  </div>
+
+  <div class="recruit-footer">
+    <span class="recruit-back" onclick="goTo('page-home')">← 返回首页</span>
+    <p style="margin-top:10px">© 2026 乐家和有限公司</p>
+  </div>
+</div>
+
+</div>
+
+<script>
+function goTo(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0,0);
+  // 进入搜索页时清空
+  if(pageId === 'page-search'){
+    document.getElementById('searchPwd').value = '';
+    document.getElementById('searchPwdHint').innerText = '';
+  }
+}
+
+function checkSearchPwd(){
+  var val = document.getElementById('searchPwd').value.trim();
+  if(val === '欢迎回家'){
+    document.getElementById('searchPwdHint').innerText = '';
+    goTo('page-recruit');
+  } else if(val === ''){
+    document.getElementById('searchPwdHint').innerText = '请输入口令';
+  } else {
+    document.getElementById('searchPwdHint').innerText = '口令错误';
+  }
+}
+
+function showFail(el){
+  var hint = el.querySelector('.fail-hint');
+  if(hint){
+    hint.classList.add('show');
+    setTimeout(function(){
+      hint.classList.remove('show');
+    }, 2000);
+  }
+}
+</script>
+</body>
+</html>
